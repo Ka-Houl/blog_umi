@@ -1,0 +1,82 @@
+body,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+ol,
+ul,
+li,
+dl,
+dd,
+input,
+button {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-weight: normal;
+}
+
+em,
+i {
+  font-weight: normal;
+  font-style: normal;
+}
+
+input[type='submit'],
+input[type='reset'],
+input[type='button'],
+input[type='search'],
+button {
+  appearance: none;
+}
+
+/* input [type=search] 搜索框去掉默认边框和旁边的小图标 */
+input::-webkit-search-cancel-button {
+  display: none;
+}
+
+button,
+textarea,
+input {
+  border: 0;
+  background: none;
+}
+
+a {
+  text-decoration: none;
+  outline: none;
+
+  &:focus,
+  &:link {
+    -moz-outline: none;
+    outline: none;
+  }
+
+  &:link,
+  &:visited,
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+/* html tag中比较常用的设定 */
+html,
+body {
+  min-height: 100vh;
+
+  font-family: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
+    'WenQuanYi Micro Hei', sans-serif;
+}

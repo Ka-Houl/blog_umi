@@ -1,0 +1,36 @@
+@import '~@/cssLib/mixins.less';
+
+.wrapper {
+  position: relative;
+  height: 180px;
+  margin: 0 50px 30px;
+  background-color: rgba(0, 0, 0, 0.35);
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.5s all;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.45);
+    .title {
+      top: 30px;
+    }
+    .des {
+      top: 105px;
+    }
+  }
+  .title {
+    position: absolute;
+    top: 40px;
+    width: 100%;
+    font-size: 25px;
+    transition: 0.3s all;
+  }
+  .des {
+    position: absolute;
+    top: 120px;
+    width: 100%;
+    font-size: 14px;
+    transition: 0.3s all;
+  }
+}
