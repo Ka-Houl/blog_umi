@@ -14,6 +14,7 @@ export default (props: any) => {
   const menu = [
     { key: '/', name: '主页' },
     { key: '/self', name: '个人' },
+    { key: '/sort', name: '分类' },
     { key: '/github', name: 'GitHub' },
   ];
   return (
