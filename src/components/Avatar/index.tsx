@@ -5,7 +5,7 @@ import styles from './index.less';
 import avatarImg from '@/assets/images/avatar.jpg';
 import { MyIcon } from '@/utils';
 
-export default props => {
+export default (props: object) => {
   return (
     <div className={styles.img_box}>
       <img src={avatarImg} alt="" />

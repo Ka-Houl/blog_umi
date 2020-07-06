@@ -1,14 +1,13 @@
 import { defineConfig } from 'umi';
-
+import pageRoutes from './config/router.config';
 export default defineConfig({
   nodeModulesTransform: {
     type: 'none',
   },
-  routes: [
-    { path: '/', component: '@/pages/index' },
-    // { path: '/', component: '@/pages/index/index' },
-    // { path: '/self', component: '@/pages/self/index' },
-    // { path: '/github', component: '@/pages/github/index' },
-    // { path: '/index', component: '@/pages/index/index' },
-  ],
+  history: {
+    type: 'hash', //router类型
+  },
+  routes: pageRoutes,
+  outputPath: './blog', //指定输出路径。
+  // publicPath: '/blog/'   //会添加打包前缀，在本地warmserver需要相应配置，线上不需要
 });
