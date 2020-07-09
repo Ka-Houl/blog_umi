@@ -1,4 +1,4 @@
-export default [
+const routerConfig: any = [
   {
     path: '/',
     component: '@/layouts/index',
@@ -14,3 +14,5 @@ export default [
   // { path: '/github', component: '@/pages/github/index' },
   // { path: '/index', component: '@/pages/index/index' },
 ];
+
+export default routerConfig;
