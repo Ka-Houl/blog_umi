@@ -2,7 +2,14 @@ import React, { Component } from 'react';
 import { history } from 'umi';
 import styles from './index.less';
 import { Button } from 'antd';
-import { connect } from 'dva';
+// import { connect } from 'dva';
+import {
+  IndexModelState,
+  ConnectRC,
+  Loading,
+  connect,
+  ConnectProps,
+} from 'umi';
 import ProgramWrapper from '@/components/ProgramWrapper';
 const program_list = [
   {
@@ -26,32 +33,63 @@ const program_list = [
   //   href: 'http://xiaomipro.kahoul.top/',
   // },
 ];
-// @connect(({ global }) => ({
-//   global,
-// }))
-class Index extends Component {
-  constructor(props) {
+interface PageProps extends ConnectProps {
+  global: IndexModelState;
+  loading: boolean;
+}
+@connect(({ global, index }) => ({
+  global,
+  index,
+}))
+class Index extends Component<PageProps> {
+  constructor(props: PageProps) {
     super(props);
     this.state = {};
   }
+  testClick = () => {
+    this.props.dispatch({
+      type: 'index/fetchData',
+    });
+    this.props
+      .dispatch({
+        type: 'global/setData',
+      })
+      .then(() => {
+        console.log(this.props.global);
+      })
+      .catch(err => {
+        console.log('err', err);
+      });
+  };
   render() {
+    console.log(this.props);
     return (
       <div className={styles.container}>
         {program_list.map((item, index) => {
           return <ProgramWrapper data={item} key={index} />;
         })}
-        {/* 
+
         <Button
           type="primary"
           onClick={() => {
             // history.push('/list');
+            this.testClick();
           }}
         >
-          Primary
-        </Button> */}
+          {this.props.global.guideStep}
+        </Button>
       </div>
     );
   }
 }
 
 export default Index;
+
+// export default connect(
+//   ({ global, loading }: { global: IndexModelState; loading: Loading }) => {
+//     return {
+//       global,
+//       loading,
+//     };
+//   },
+// )(Index);
