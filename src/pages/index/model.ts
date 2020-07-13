@@ -2,11 +2,13 @@ export default {
   namespace: 'index',
   state: { data: 111 },
   effects: {
-    *fetchData({ payload }, { call, put }) {
+    *fetchData({ payload }, { call, put, select }) {
+      const data = yield select(state => state.index.data);
+
       yield put({
         type: 'save',
         payload: {
-          data: [11111],
+          data: data + 'A',
         },
       });
     },

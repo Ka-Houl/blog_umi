@@ -1,5 +1,21 @@
+import { Effect, ImmerReducer, Reducer, Subscription } from 'umi';
+
 export interface globalModelState {
-  name: string;
+  name?: string;
+  guideStep: number;
+}
+export interface globalModelType {
+  namespace: 'index';
+  state: globalModelState;
+  effects: {
+    setData: Effect;
+  };
+  reducers: {
+    save: Reducer<globalModelState>;
+    // 启用 immer 之后
+    // save: ImmerReducer<IndexModelState>;
+  };
+  subscriptions: { setup: Subscription };
 }
 export default {
   namespace: 'global',
@@ -24,7 +40,17 @@ export default {
       }
     },
   },
-  subscriptions: {},
+  subscriptions: {
+    setup({ dispatch, history }) {
+      return history.listen(({ pathname }) => {
+        if (pathname === '/') {
+          dispatch({
+            type: 'query',
+          });
+        }
+      });
+    },
+  },
   reducers: {
     save(state, action) {
       const payload = action.payload;

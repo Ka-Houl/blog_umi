@@ -36,6 +36,7 @@ const program_list = [
 interface PageProps extends ConnectProps {
   global: IndexModelState;
   loading: boolean;
+  index: IndexModelState;
 }
 @connect(({ global, index }) => ({
   global,
