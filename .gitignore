@@ -9,7 +9,7 @@
 
 # production
 /dist
-
+/blog
 # misc
 .DS_Store
 
