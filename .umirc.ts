@@ -8,10 +8,10 @@ export default defineConfig({
     type: 'hash', //router类型
   },
   hash: true, //配置是否让生成的文件包含 hash 后缀
-  // devServer: {
-  //   port: 9009,
-  //   // https: true
-  // },
+  devServer: {
+    port: 9009,
+    // https: true
+  },
   dva: {
     immer: true,
     hmr: false,
@@ -20,7 +20,7 @@ export default defineConfig({
   title: '个人博客',
 
   routes: pageRoutes,
-  outputPath: '/blog', //指定输出路径。  //FIXME:设置这个属性，会使webpack热更新失效
+  // outputPath: '/blog', //指定输出路径。  //FIXME:设置这个属性，会使webpack热更新失效
   chainWebpack(config, { webpack }) {
     config.optimization.splitChunks({
       chunks: 'async',

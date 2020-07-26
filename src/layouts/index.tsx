@@ -44,7 +44,7 @@ export default (props: any) => {
             // span={22}
             xs={{ span: 22 }}
             md={{ span: 15 }}
-            lg={{ span: 14 }}
+            lg={{ span: 9, offset: 2 }}
           >
             {props.children}
           </Col>

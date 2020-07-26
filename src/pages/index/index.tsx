@@ -13,7 +13,7 @@ import {
 import ProgramWrapper from '@/components/ProgramWrapper';
 const program_list = [
   {
-    title: '去哪儿手机版',
+    title: '旅游景点推荐',
     des: 'vue开发的移动端应用',
     href: 'http://travel.kahoul.top/',
   },
@@ -23,7 +23,7 @@ const program_list = [
     href: 'http://yixiantong.kahoul.top/',
   },
   {
-    title: '小米官网',
+    title: '手机购物官网',
     des: 'koa框架开发的web端SSR应用',
     href: 'http://xiaomipro.kahoul.top/',
   },
@@ -38,10 +38,10 @@ interface PageProps extends ConnectProps {
   loading: boolean;
   index: IndexModelState;
 }
-@connect(({ global, index }) => ({
-  global,
-  index,
-}))
+// @connect(({ global, index }) => ({
+//   global,
+//   index,
+// }))
 class Index extends Component<PageProps> {
   constructor(props: PageProps) {
     super(props);
@@ -70,7 +70,7 @@ class Index extends Component<PageProps> {
           return <ProgramWrapper data={item} key={index} />;
         })}
 
-        <Button
+        {/* <Button
           type="primary"
           onClick={() => {
             // history.push('/list');
@@ -78,19 +78,28 @@ class Index extends Component<PageProps> {
           }}
         >
           {this.props.global.guideStep}
-        </Button>
+        </Button> */}
       </div>
     );
   }
 }
 
-export default Index;
+// export default Index;
 
-// export default connect(
-//   ({ global, loading }: { global: IndexModelState; loading: Loading }) => {
-//     return {
-//       global,
-//       loading,
-//     };
-//   },
-// )(Index);
+export default connect(
+  ({
+    global,
+    loading,
+    index,
+  }: {
+    global: IndexModelState;
+    loading: Loading;
+    index: IndexModelState;
+  }) => {
+    return {
+      global,
+      loading,
+      index,
+    };
+  },
+)(Index);
