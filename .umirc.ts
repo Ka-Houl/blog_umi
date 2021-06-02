@@ -4,6 +4,8 @@ export default defineConfig({
   // nodeModulesTransform: {
   //   type: 'none',
   // },
+  // ssr: {},
+
   history: {
     type: 'hash', //router类型
   },
