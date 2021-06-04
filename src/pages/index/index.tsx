@@ -64,6 +64,8 @@ class Index extends Component<PageProps> {
       });
   };
   componentDidMount = () => {
+    console.log('process.env', process.env);
+
     getViewsNum()
       .then(res => console.log('res', res))
       .catch(err => {
