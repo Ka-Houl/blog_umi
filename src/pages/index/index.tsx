@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { history } from 'umi';
+import { history, IGetInitialProps } from 'umi';
 import styles from './index.less';
 import { Button, Spin } from 'antd';
 // import { connect } from 'dva';
@@ -36,11 +36,19 @@ const program_list = [
   //   url: 'http://xiaomipro.kahoul.top/',
   // },
 ];
-interface PageProps extends ConnectProps {
+
+type SSRProps = Pick<PageState, 'programList'>;
+interface PageProps extends ConnectProps, SSRProps {
   global: IndexModelState;
   loading: boolean;
   index: IndexModelState;
 }
+// type PageProps = ConnectProps &
+//   SSRProps & {
+//     global: IndexModelState;
+//     loading: boolean;
+//     index: IndexModelState;
+//   };
 interface PageState {
   programList: {
     url: string;
@@ -55,6 +63,22 @@ interface PageState {
 //   index,
 // }))
 class Index extends Component<PageProps, PageState> {
+  static getInitialProps = (async ctx => {
+    let res = await getArticleList<
+      {
+        url: string;
+        name: string;
+        description: string;
+        img?: string;
+      }[]
+    >().then(res => {
+      console.log(res);
+      return res;
+    });
+    return Promise.resolve({
+      programList: res,
+    });
+  }) as IGetInitialProps;
   constructor(props: PageProps) {
     super(props);
     this.state = {
@@ -112,14 +136,14 @@ class Index extends Component<PageProps, PageState> {
         });
       });
   };
-  componentDidMount = () => {
-    this.reqArticleList();
-  };
+  componentDidMount = () => {};
   render() {
-    const { programList, isProgramListLoading } = this.state;
+    const { isProgramListLoading } = this.state;
+    const { programList } = this.props;
     console.log(this.props);
     return (
       <div className={styles.container}>
+        {/* <div>{JSON.stringify(programList)}</div> */}
         <View />
         {isProgramListLoading ? (
           <div className={styles.spin_wrapper}>
