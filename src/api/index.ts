@@ -12,5 +12,5 @@ export const addViewsNum = <T>() => {
 
 // 获取文章列表
 export const getArticleList = <T>() => {
-  return requestAxios<T>({ url: '/getArticleList', method: 'post' });
+  return requestAxios<T>({ url: '/getArticleList' });
 };
