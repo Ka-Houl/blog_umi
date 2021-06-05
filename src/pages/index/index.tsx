@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { history } from 'umi';
 import styles from './index.less';
-import { Button } from 'antd';
+import { Button, Spin } from 'antd';
 // import { connect } from 'dva';
 import {
   IndexModelState,
@@ -10,29 +10,30 @@ import {
   connect,
   ConnectProps,
 } from 'umi';
-import ProgramWrapper from '@/components/ProgramWrapper';
 import View from '@/components/View';
+import ProgramWrapper from '@/components/ProgramWrapper';
+import { getArticleList } from '@/api';
 // import { getViewsNum } from '@/api';
 const program_list = [
   {
-    title: '旅游景点推荐',
-    des: 'vue开发的移动端应用',
-    href: 'http://travel.kahoul.top/',
+    name: '旅游景点推荐',
+    description: 'vue开发的移动端应用',
+    url: 'http://travel.kahoul.top/',
   },
   {
-    title: '一线生活通',
-    des: 'vue开发的移动端应用',
-    href: 'http://yixiantong.kahoul.top/',
+    name: '一线生活通',
+    description: 'vue开发的移动端应用',
+    url: 'http://yixiantong.kahoul.top/',
   },
   {
-    title: '手机购物官网',
-    des: 'koa框架开发的web端SSR应用',
-    href: 'http://xiaomipro.kahoul.top/',
+    name: '手机购物官网',
+    description: 'koa框架开发的web端SSR应用',
+    url: 'http://xiaomipro.kahoul.top/',
   },
   // {
   //   title: '京东官网',
-  //   des: 'koa框架开发的web端SSR应用',
-  //   href: 'http://xiaomipro.kahoul.top/',
+  //   description: 'koa框架开发的web端SSR应用',
+  //   url: 'http://xiaomipro.kahoul.top/',
   // },
 ];
 interface PageProps extends ConnectProps {
@@ -40,14 +41,26 @@ interface PageProps extends ConnectProps {
   loading: boolean;
   index: IndexModelState;
 }
+interface PageState {
+  programList: {
+    url: string;
+    name: string;
+    description: string;
+    img?: string;
+  }[];
+  isProgramListLoading: boolean;
+}
 // @connect(({ global, index }) => ({
 //   global,
 //   index,
 // }))
-class Index extends Component<PageProps> {
+class Index extends Component<PageProps, PageState> {
   constructor(props: PageProps) {
     super(props);
-    this.state = {};
+    this.state = {
+      programList: [],
+      isProgramListLoading: false,
+    };
   }
   testClick = () => {
     this.props.dispatch({
@@ -64,15 +77,61 @@ class Index extends Component<PageProps> {
         console.log('err', err);
       });
   };
-  componentDidMount = () => {};
+
+  /**
+   *
+   * 获取项目列表
+   * @memberof Index
+   */
+  reqArticleList = () => {
+    this.setState({
+      isProgramListLoading: true,
+    });
+    getArticleList<
+      {
+        url: string;
+        name: string;
+        description: string;
+        img?: string;
+      }[]
+    >()
+      .then(res => {
+        console.log(res);
+        if (Array.isArray(res)) {
+          this.setState({
+            programList: res,
+          });
+        } else {
+          console.warn(121212121221);
+          this.reqArticleList();
+        }
+      })
+      .finally(() => {
+        this.setState({
+          isProgramListLoading: false,
+        });
+      });
+  };
+  componentDidMount = () => {
+    this.reqArticleList();
+  };
   render() {
+    const { programList, isProgramListLoading } = this.state;
     console.log(this.props);
     return (
       <div className={styles.container}>
         <View />
-        {program_list.map((item, index) => {
-          return <ProgramWrapper data={item} key={index} />;
-        })}
+        {isProgramListLoading ? (
+          <div className={styles.spin_wrapper}>
+            <Spin />
+          </div>
+        ) : (
+          <>
+            {programList.map((item, index) => {
+              return <ProgramWrapper data={item} key={index} />;
+            })}
+          </>
+        )}
 
         {/* <Button
           type="primary"

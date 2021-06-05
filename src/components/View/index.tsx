@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Spin } from 'antd';
-import { getViewsNum } from '@/api';
+import { getViewsNum, addViewsNum } from '@/api';
 
 import styles from './index.less';
 
@@ -13,6 +13,7 @@ const View = () => {
       .then(res => {
         setViewNum(res.num);
         console.log('res', res);
+        addViewsNum();
       })
       .catch(err => {
         console.log('err', err);
