@@ -49,6 +49,23 @@ export default defineConfig({
       },
     });
   },
+  //通过代理解决本地跨域
+  proxy: {
+    '/api': {
+      target: 'http://blog_api.kahoul.top',
+      changeOrigin: true,
+      pathRewrite: { '^/api': '' },
+    },
+    '/proxyDev': {
+      // target: 'http://192.168.8.51:8080',
+      target: 'https://sysu.yibaogao.com',
+      // target: 'https://aizhushou.yibaogao.com',
+      // target: 'http://sysu.yibaogao.com',    http协议会变成get请求？？？
+
+      changeOrigin: true,
+      pathRewrite: { '^/proxyDev': '' },
+    },
+  },
   // dynamicImport:true
   // publicPath: '/blog/'   //会添加打包前缀，在本地warmserver需要相应配置，线上不需要
 });

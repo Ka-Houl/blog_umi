@@ -1,7 +1,4 @@
 import React from 'react';
-import { Tooltip } from 'antd';
-import { history } from 'umi';
-
 import styles from './index.less';
 
 export default ({ data }) => {

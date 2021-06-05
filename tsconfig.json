@@ -13,7 +13,9 @@
       "@/*": ["src/*"],
       "@@/*": ["src/.umi/*"]
     },
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "types": ["webpack-env", "node"],
+    "suppressImplicitAnyIndexErrors": true
   },
   "include": [
     "mock/**/*",

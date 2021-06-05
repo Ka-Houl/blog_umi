@@ -11,7 +11,8 @@ import {
   ConnectProps,
 } from 'umi';
 import ProgramWrapper from '@/components/ProgramWrapper';
-import { getViewsNum } from '@/api';
+import View from '@/components/View';
+// import { getViewsNum } from '@/api';
 const program_list = [
   {
     title: '旅游景点推荐',
@@ -63,19 +64,12 @@ class Index extends Component<PageProps> {
         console.log('err', err);
       });
   };
-  componentDidMount = () => {
-    console.log('process.env', process.env);
-
-    getViewsNum()
-      .then(res => console.log('res', res))
-      .catch(err => {
-        console.log('err', err);
-      });
-  };
+  componentDidMount = () => {};
   render() {
     console.log(this.props);
     return (
       <div className={styles.container}>
+        <View />
         {program_list.map((item, index) => {
           return <ProgramWrapper data={item} key={index} />;
         })}
