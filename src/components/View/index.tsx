@@ -9,18 +9,21 @@ const View = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   useEffect(() => {
     setIsLoading(true);
-    getViewsNum<{ num: number }>()
-      .then(res => {
-        setViewNum(res.num);
-        console.log('res', res);
-        addViewsNum();
-      })
-      .catch(err => {
-        console.log('err', err);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    // 服务端代码有问题，待排查，不同的接口竞态请求，会相互影响响应体
+    setTimeout(() => {
+      getViewsNum<{ num: number }>()
+        .then(res => {
+          setViewNum(res.num);
+          console.log('res', res);
+          addViewsNum();
+        })
+        .catch(err => {
+          console.log('err', err);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }, 1000);
   }, []);
   return (
     <div className={styles.wrapper} onClick={() => {}}>
