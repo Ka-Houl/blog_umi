@@ -151,9 +151,10 @@ class Index extends Component<PageProps, PageState> {
           </div>
         ) : (
           <>
-            {programList.map((item, index) => {
-              return <ProgramWrapper data={item} key={index} />;
-            })}
+            {programList &&
+              programList.map((item, index) => {
+                return <ProgramWrapper data={item} key={index} />;
+              })}
           </>
         )}
 

@@ -1,10 +1,17 @@
 import { defineConfig } from 'umi';
 import pageRoutes from './config/router.config';
+const env = process.env.NODE_ENV;
+const outputPath = 'dist/';
+
+const path = env === 'development' ? 'http://127.0.0.1:7001/' : outputPath;
+
 export default defineConfig({
   // nodeModulesTransform: {
   //   type: 'none',
   // },
-  ssr: {},
+  ssr: {
+    devServerRender: false,
+  },
 
   history: {
     type: 'browser', //router类型
@@ -20,6 +27,7 @@ export default defineConfig({
     skipModelValidate: true,
   },
   title: 'KaHoul的个人博客',
+  publicPath: path,
 
   routes: pageRoutes,
   // outputPath: '/blog', //指定输出路径。  //FIXME:设置这个属性，会使webpack热更新失效
