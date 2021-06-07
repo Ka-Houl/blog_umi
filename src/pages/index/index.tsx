@@ -72,7 +72,7 @@ class Index extends Component<PageProps, PageState> {
         img?: string;
       }[]
     >().then(res => {
-      console.log(res);
+      // console.log(res);
       return res;
     });
     return Promise.resolve({
@@ -95,10 +95,10 @@ class Index extends Component<PageProps, PageState> {
         type: 'global/setData',
       })
       .then(() => {
-        console.log(this.props.global);
+        // console.log(this.props.global);
       })
       .catch(err => {
-        console.log('err', err);
+        // console.log('err', err);
       });
   };
 
@@ -120,7 +120,7 @@ class Index extends Component<PageProps, PageState> {
       }[]
     >()
       .then(res => {
-        console.log(res);
+        // console.log(res);
         if (Array.isArray(res)) {
           this.setState({
             programList: res,
@@ -140,7 +140,7 @@ class Index extends Component<PageProps, PageState> {
   render() {
     const { isProgramListLoading } = this.state;
     const { programList } = this.props;
-    console.log(this.props);
+    // console.log(this.props);
     return (
       <div className={styles.container}>
         {/* <div>{JSON.stringify(programList)}</div> */}
