@@ -4,9 +4,9 @@ export interface globalModelState {
   name?: string;
   guideStep: number;
 }
-export interface globalModelType {
-  namespace: 'index';
-  state: globalModelState;
+export interface globalModelType<T> {
+  namespace: string;
+  state: T;
   effects: {
     setData: Effect;
   };
@@ -60,4 +60,4 @@ export default {
       };
     },
   },
-};
+} as globalModelType<globalModelState>;
