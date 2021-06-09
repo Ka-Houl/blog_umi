@@ -11,15 +11,10 @@
   },
   "gitHooks": {
     "pre-commit": "lint-staged",
-    "commit-msg": "node test.js"
+    "commit-msg": "node ./hook/commit-msg.js"
   },
   "lint-staged": {
-    "*.{js,jsx,less,md,json}": [
-      "prettier --write"
-    ],
-    "*.ts?(x)": [
-      "prettier --parser=typescript --write"
-    ]
+    "*": "npx husky-conflict-hook"
   },
   "dependencies": {
     "@ant-design/pro-layout": "^5.0.12",
@@ -32,5 +27,8 @@
     "react-dom": "^16.12.0",
     "umi": "^3.2.9",
     "yorkie": "^2.0.0"
+  },
+  "devDependencies": {
+    "husky-conflict-hook": "0.0.2"
   }
 }
